@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script type="application/javascript">
+
+        const drawGL = () => {
+            const canvas = document.getElementById('glCanvas');
+            if (canvas.getContext) {
+                const gl = canvas.getContext('webgl', {
+                    preserveDrawingBuffer: true
+                });
+                if (gl) {
+                    gl.clearColor(0.0, 0.0, 0.0, 0.5);
+                    gl.clear(gl.COLOR_BUFFER_BIT);
+                } else {
+                    alert('gl not supported');
+                }
+            }
+
+        };
+
+        const draw2d = () => {
+            const canvas = document.getElementById('textCanvas');
+            if (canvas.getContext) {
+                const ctx = canvas.getContext('2d');
+                if (ctx) {
+                    ctx.rect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                    ctx.fillStyle = 'rgba(0,0,255, 0.5)';
+                    // ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                    ctx.fill();
+                    ctx.font = "17px Arial";
+                    ctx.fillStyle = 'black';
+                    ctx.fillText("2d canvas", 5, 20);
+                } else {
+                    alert('ctx not supported');
+                }
+            }
+        };
+
+        const render = () => {
+            drawGL();
+            draw2d();
+        };
+    </script>
+</head>
+<body onload="render();" style="background-color: #f99">
+
+<div style="float: left;">
+    <span style="vertical-align: top">GL:</span>
+    <canvas id="glCanvas"
+            width="100"
+            height="100">
+    </canvas>
+</div>
+
+<div style="float: left">
+    <canvas id="textCanvas"
+            width="100"
+            height="100">
+    </canvas>
+</div>
+</body>
+</html>
